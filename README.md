@@ -23,20 +23,20 @@ CW=clockwise spin,CCW=counter-clockwise spin, R1=regenarative breaking using hig
 		
 		
 		4 functions of the motor 2 sbldc motor
-		8'b00001000; //M2 CW 30
+		8'b00001000; //CW
 		8'b00001001; //CCw
 		8'b00001010; //R1
 		8'b00001100; //R2
 	
 		
 		4 functions for motor 1 and motor 2  at the same time 
-		8'b00001011; //M1&M2 CW 55
+		8'b00001011; //CW
 		8'b00001110; //CCW
 		8'b00000111; //R1
 		8'b00001111; //R2
 	
 		4 functions of the motor 3 sbldc motor
-		8'b00010000; //CW 80
+		8'b00010000; //CW
 		8'b00100000; //CCW
 		8'b00110000; //R1
 		8'b01000000; //R2
