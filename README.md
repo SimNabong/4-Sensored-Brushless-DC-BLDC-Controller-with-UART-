@@ -3,6 +3,9 @@ This repository contains codes for a controller that allows the user to control 
 The Top Entity module is the SBLDCMC_w_UART.v which contains 7 modules: the UARTReceiver, EightBit_to_SBLDCCommutation.v, BaudControl.v, UARTReceiverStateMachine.v, Eight_Bit_Parity_Checker.v, Diverging8bit.v and CommutationControl.v module.
 The purpose of this module is to connect the entity modules EightBit_to_SBLDCCommutation.v and UARTReceiver.v
 
+Here is a link to the UART Receiver module
+https://github.com/SimNabong/UART-Transmitter-and-Receiver-with-Verilog
+
 Currently, this controller only uses 24 out of the 256 possible combinations from the 8-bits given by the UART. Which means, this controller can be further modified/improved.
 The 4 SBLDC motor has 4 functions each, which can be found in the CommutationControl.v moodule. These functions are clockwise spin,counter-clockwise spin, regenerative breaking using high-side mosfets, and regen breaking using the low-side mosfets(or any other power transistor).
 
