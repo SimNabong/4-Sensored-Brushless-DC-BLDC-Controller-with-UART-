@@ -1,15 +1,12 @@
 # 4-Sensored-Brushless-DC(SBLDC)-Controller-with-UART Using Verilog
-This repository contains codes for a controller that allows the user to control 4 BLDC motors at the same time, using an 8-bit UART with parity checking and baud control. For more details about the UART code, check my UART repository.
+This repository contains codes for a controller that allows the user to control 4 BLDC motors at the same time, using an 8-bit UART with parity checking and baud control. For more details about the UART code, check my UART repository(https://github.com/SimNabong/UART-Transmitter-and-Receiver-with-Verilog).
 The Top Entity module is the SBLDCMC_w_UART.v which contains 7 modules: the UARTReceiver, EightBit_to_SBLDCCommutation.v, BaudControl.v, UARTReceiverStateMachine.v, Eight_Bit_Parity_Checker.v, Diverging8bit.v and CommutationControl.v module.
 The purpose of this module is to connect the entity modules EightBit_to_SBLDCCommutation.v and UARTReceiver.v
 
-Here is a link to the UART Receiver module
-https://github.com/SimNabong/UART-Transmitter-and-Receiver-with-Verilog
-
 Currently, this controller only uses 24 out of the 256 possible combinations from the 8-bits given by the UART. Which means, this controller can be further modified/improved.
-The 4 SBLDC motor has 4 functions each, which can be found in the CommutationControl.v moodule. These functions are clockwise spin,counter-clockwise spin, regenerative breaking using high-side mosfets, and regen breaking using the low-side mosfets(or any other power transistor).
+The 4 SBLDC motor has 4 functions each, which can be found in the CommutationControl.v moodule. These functions are clockwise spin,counter-clockwise spin, regenerative breaking using high-side mosfets, and regen breaking using the low-side mosfets. #note that it can also be other power semiconductor devices
 
-To control the CommutationControl.v module, i employed an 8 to 12 diverging combinational circuit and placed it in the Diverging8bit.v module. This module allows me to use the 8-bit given by the UART to control each of the modules separately and in combinations with each other. Currently this only uses 24 combinations out of the 256 possible ones, but this is only due to the incompleteness of this system. In the near future, im planning on adding more of the functions I have designed that the motor will be able to do. Also, utilize more possible combinations and maybe use a UART that collects more that 8-bits to allow for more possible combinations. 
+To control the CommutationControl.v module, i employed an 8 to 12 diverging combinational circuit and placed it in the Diverging8bit.v module. This module allows me to use the 8-bit given by the UART to control each of the modules separately and in combinations with each other. Currently this only uses 24 combinations out of the 256 possible ones, but this is only due to the incompleteness of this system. In the near future, im planning on adding more of the functions I have designed that the motor will be able to do. Also, utilize more possible combinations and maybe use a UART that collects more that 8-bits or another communication protocol. 
 
 Here are the cuurrent Control Signals you can use for this controller:
 Control signals	
