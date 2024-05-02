@@ -1,63 +1,102 @@
-`timescale 1ns/1ps
+module EightBit_to_SBLDCCommutation_testbench();
+	reg [7:0]In; // UART reg signal from the transmitter
+	reg clk;
+	reg [2:0]HS1;
+	reg [2:0]HS2;
+	reg [2:0]HS3;
+	reg [2:0]HS4;	//3 HALL SENSOR SIGNALS FROM each MOTOR
+	wire [23:0] PT; //mosfet controls, 6 for each bldc motor	
 
-module Diverging8bit_testbench();
-	reg [7:0] In;
-	wire [11:0] CCwin;
-	
-	Diverging8bit Diverging8bitInst(.In(In), .CCwin(CCwin));
+	EightBit_to_SBLDCCommutation EightBit_to_SBLDCCommutationInst(
+			.In(In), // UART Input signal from the transmitter
+			.clk(clk),
+			.HS1(HS1), .HS2(HS2), .HS3(HS3), .HS4(HS4), //3 HALL SENSOR SIGNALS FROM each MOTOR
+			.PT(PT) //mosfet controls 6 for each bldc motor	
+	);	
 	
 	initial begin
-		In = 8'b0;
+		clk = 0; // Set the clock input to 0
+		forever #1 clk = ~clk; // Toggle the clock every T/7400 units of time
+	end
 	
-		#5 In = 8'b00000001; // CWM1 [0]
-		#5 In = 8'b00000010; // CCW [1]
-		#5 In = 8'b00000011; //R1 [0][1]
-		#5 In = 8'b00000100; //R2 [2]
-	
-		#5 In = 8'b00000000; //all off
-	
-		#5 In = 8'b00001000; //M2 CW 30 [0]
-		#5 In = 8'b00001001; //CCw [1]
-		#5 In = 8'b00001010; //R1 [[0][1]
-		#5 In = 8'b00001100; //R2 [2]
-	
-		#5 In = 8'b00000000;
+	initial begin
+		In = 8'd0;
+		HS1 = 3'd1; HS2 = 3'd1; HS3 = 3'd1; HS4 = 3'd1;
+		
+		#10 In = 8'd1;
+		#10 HS1 = 3'd3;
+		#10 HS1 = 3'd2;
+		#10 HS1 = 3'd6;
+		#10 HS1 = 3'd4;
+		#10 HS1 = 3'd5;
+		#10 HS1 = 3'd1;
 
-		#5 In = 8'b00001011; //M1&M2 CW 55
-		#5 In = 8'b00001110; //CCW
-		#5 In = 8'b00000111; //R1
-		#5 In = 8'b00001111; //R2
-	
-		#5 In = 8'b00000000;
-	
-		#5 In = 8'b00010000; //M3 CW80
-		#5 In = 8'b00100000; //CCW
-		#5 In = 8'b00110000; //R1
-		#5 In = 8'b01000000; //R2
-	
-		#5 In = 8'b00000000;
-	
-		#5 In = 8'b10000000; // CW M4
-		#5 In = 8'b11000000; // CCW
-		#5 In = 8'b10100000; //R1
-		#5 In = 8'b01110000; //R2
-	
-		#5 In = 8'b11100000; //M3&M4 CW
-		#5 In = 8'b11010000; //CCW
-		#5 In = 8'b10110000; //R1
-		#5 In = 8'b11110000; //R2
-	
-		#5 In = 8'b00000000;
-	
-	
+		#10 In = 8'd2;
+		#10 HS1 = 3'd3;
+		#10 HS1 = 3'd2;
+		#10 HS1 = 3'd6;
+		#10 HS1 = 3'd4;
+		#10 HS1 = 3'd5;
+		#10 HS1 = 3'd1;
+
+		#10 In = 8'd3;
+		#10 HS1 = 3'd3;
+		#10 HS1 = 3'd2;
+		#10 HS1 = 3'd6;
+		#10 HS1 = 3'd4;
+		#10 HS1 = 3'd5;
+		#10 HS1 = 3'd1;
+		
+		#10 In = 8'd4;
+		#10 HS1 = 3'd3;
+		#10 HS1 = 3'd2;
+		#10 HS1 = 3'd6;
+		#10 HS1 = 3'd4;
+		#10 HS1 = 3'd5;
+		#10 HS1 = 3'd1;
+		
+		#10 In=8'd128;
+		#10 HS4 = 3'd3;
+		#10 HS4 = 3'd2;
+		#10 HS4 = 3'd6;
+		#10 HS4 = 3'd4;
+		#10 HS4 = 3'd5;
+		#100 HS4 = 3'd1;
+		
+		#10 In = 8'd192;
+		#10 HS4 = 3'd3;
+		#10 HS4 = 3'd2;
+		#10 HS4 = 3'd6;
+		#10 HS4 = 3'd4;
+		#10 HS4 = 3'd5;
+		#10 HS4 = 3'd1;
+		
+		#10 In = 8'd160;
+		#10 HS4 = 3'd3;
+		#10 HS4 = 3'd2;
+		#10 HS4 = 3'd6;
+		#10 HS4 = 3'd4;
+		#10 HS4 = 3'd5;
+		#10 HS4 = 3'd1;
+		
+		#10 In = 8'd112;
+		#10 HS4 = 3'd3;
+		#10 HS4 = 3'd2;
+		#10 HS4 = 3'd6;
+		#10 HS4 = 3'd4;
+		#10 HS4 = 3'd5;
+		#10 HS4 = 3'd1;
+		
 		#0 $finish;			
 	
 	end
 	
 	initial begin
-		$monitor("simtime=%g, In=%b, CCwin=%b", $time,In,CCwin);
+		$monitor("simtime=%g,In=%b,HS1=%b,HS2=%b,HS3=%b,HS4=%b,PT=%b", $time,In,HS1,HS2,HS3,HS4,PT);
 	end
 		
-		
-		
+
+
 endmodule
+
+
