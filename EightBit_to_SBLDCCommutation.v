@@ -1,3 +1,4 @@
+//This is a top entity module contains Diverging8bit and CommutationControl module 
 module EightBit_to_SBLDCCommutation(
 	input [7:0]In, // UART Input signal from the transmitter
 	input clk,
@@ -10,7 +11,7 @@ module EightBit_to_SBLDCCommutation(
 	wire [11:0] CCinw;
 	
 
-	Diverging8bit Diverging8bitInst(.In(In), .CCin(CCinw));
+	Diverging8bit Diverging8bitInst(.In(In), .clk(clk), .CCin(CCinw));
 	
 	CommutationControl CommutationControlInst1(.clk(clk), .UI(CCinw[2:0]), .HS(HS1[2:0]), .PT(PT[5:0]));
 	
