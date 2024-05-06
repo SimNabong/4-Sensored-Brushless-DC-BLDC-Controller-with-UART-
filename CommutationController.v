@@ -13,13 +13,14 @@ module CommutationControl(
 	
 	wire Aw,Bw,Cw,Dw,Ew,Fw;
 	reg [1:0] Ar,Br,Cr,Dr,Er,Fr; //registers for delays
-	
-	assign Aw = UI[0]&~UI[1]&~UI[2] | ~UI[0]&UI[1]&~UI[2]&HS[0]&~HS[1] | ~UI[0]&~UI[1]&UI[2]&HS[0]&~HS[2]; //time delays need to be adjusted based on mosfets turn off/on delay
-	assign Bw = ~UI[0]&UI[1]&UI[2] | ~UI[0]&UI[1]&~HS[0]&HS[1] | ~UI[0]&UI[2]&~HS[0]&HS[2];
-	assign Cw = ~UI[0]&~UI[1]&UI[2]&~HS[0]&HS[1] | UI[0]&~UI[1]&~UI[2] | ~UI[0]&UI[1]&~UI[2]&~HS[0]&HS[2];
-	assign Dw = ~UI[0]&UI[2]&HS[0]&~HS[1] | ~UI[0]&UI[1]&UI[2] | ~UI[0]&UI[1]&HS[0]&~HS[2];
-	assign Ew = UI[0]&~UI[1]&~UI[2] | ~UI[0]&~UI[1]&UI[2]&~HS[1]&HS[2] | ~UI[0]&UI[1]&~UI[2]&HS[1]&~HS[2];
-	assign Fw = ~UI[0]&UI[1]&UI[2] | ~UI[0]&UI[2]&HS[1]&~HS[2] | ~UI[0]&UI[1]&~HS[1]&HS[2];
+
+	//time delays need to be adjusted based on mosfets turn off/on delay
+	assign Aw = ~HS[0]&HS[2]&~UI[0]&UI[2] | ~HS[1]&HS[2]&~UI[0]&UI[1] | ~HS[0]&HS[1]&~UI[0]&UI[1]&UI[2] | HS[0]&~HS[1]&~UI[0]&UI[1]&UI[2] | HS[0]&~HS[2]&~UI[0]&UI[1]&UI[2] | HS[1]&~HS[2]&~UI[0]&UI[1]&UI[2];
+	assign Bw = HS[1]&~HS[2]&UI[0]&~UI[1]&~UI[2] | ~HS[1]&HS[2]&UI[0]&~UI[1]&~UI[2] | HS[0]&~HS[2]&UI[0]&~UI[1]&~UI[2] | HS[0]&~HS[2]&~UI[0]&~UI[1]&UI[2] | ~HS[0]&HS[2]&UI[0]&~UI[1]&~UI[2] | ~HS[0]&HS[1]&UI[0]&~UI[1]&~UI[2] | HS[1]&~HS[2]&~UI[0]&UI[1]&~UI[2] | HS[0]&~HS[1]&UI[0]&~UI[1]&~UI[2];
+	assign Cw = HS[0]&~HS[1]&~UI[0]&UI[1]&UI[2] | ~HS[1]&HS[2]&~UI[0]&UI[1]&UI[2] | ~HS[0]&HS[1]&~UI[0]&UI[1]&UI[2] | HS[1]&~HS[2]&~UI[0]&UI[2] | HS[0]&~HS[2]&~UI[0]&UI[1] | ~HS[0]&HS[2]&~UI[0]&UI[1]&UI[2];
+	assign Dw = ~HS[0]&HS[1]&UI[0]&~UI[1]&~UI[2] | HS[0]&~HS[1]&UI[0]&~UI[1]&~UI[2] | ~HS[0]&HS[2]&UI[0]&~UI[1]&~UI[2] | ~HS[1]&HS[2]&~UI[0]&~UI[1]&UI[2] | ~HS[1]&HS[2]&UI[0]&~UI[1]&~UI[2] | HS[1]&~HS[2]&UI[0]&~UI[1]&~UI[2] | ~HS[0]&HS[2]&~UI[0]&UI[1]&~UI[2] | HS[0]&~HS[2]&UI[0]&~UI[1]&~UI[2];
+	assign Ew = ~HS[0]&HS[2]&~UI[0]&UI[1]&UI[2] | HS[0]&~HS[2]&~UI[0]&UI[1]&UI[2] | HS[0]&~HS[1]&~UI[0]&UI[2] | ~HS[1]&HS[2]&~UI[0]&UI[1]&UI[2] | HS[1]&~HS[2]&~UI[0]&UI[1]&UI[2] | ~HS[0]&HS[1]&~UI[0]&UI[1];
+	assign Fw = HS[0]&~HS[1]&~UI[0]&UI[1]&~UI[2] | HS[0]&~HS[1]&UI[0]&~UI[1]&~UI[2] | ~HS[0]&HS[1]&~UI[0]&~UI[1]&UI[2] | HS[0]&~HS[2]&UI[0]&~UI[1]&~UI[2] | ~HS[0]&HS[1]&UI[0]&~UI[1]&~UI[2] | ~HS[1]&HS[2]&UI[0]&~UI[1]&~UI[2] | ~HS[0]&HS[2]&UI[0]&~UI[1]&~UI[2] | HS[1]&~HS[2]&UI[0]&~UI[1]&~UI[2];
 	
 	
 	always@(posedge clk)begin 
@@ -43,11 +44,8 @@ module CommutationControl(
 	end
 	
 
-	assign PT[0] = Ar[1];
-	assign PT[1] = Br[1];
-	assign PT[2] = Cr[1];
-	assign PT[3] = Dr[1];
-	assign PT[4] = Er[1];
-	assign PT[5] = Fr[1];
+	assign PT = {Ar[1],Br[1],Cr[1],Dr[1],Er[1],Fr[1]};
+
+
 
 endmodule
