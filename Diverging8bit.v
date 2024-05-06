@@ -8,34 +8,23 @@ module Diverging8bit(
 //these outputs are fed into the motor commutatiom controller, each motor having individual commutiontion controller with 3 input each
 );
 
-	reg [1:0] CCinr25 = 2'd0;
-	reg [1:0] CCinr811 = 2'd0;
+	assign CCin[0]= In[0]&In[1]&In[2]&In[3];
+	assign CCin[3] = In[0]&In[1]&In[2]&In[3];
 	
-	always@(posedge clk) begin //extra delay for the power trans safety
-		CCinr25[0] <= In[0]&In[1]&In[2]&In[3];
-		CCinr25[1] <= CCinr25[0];
-		CCinr811[0] <= In[4]&In[5]&In[6]&In[7];
-		CCinr811[1] <= CCinr811[0];
-	end
-																														// if CCW and CW are on then it's also regen break 2
-	assign CCin[2] = In[0]&(~In[1]|~In[2]|~In[3]|~In[4]|~In[5]|~In[6]|~In[7])&~CCinr25[1]; //motor 1 CCW spin
-	assign CCin[1] = In[1]&(~In[0]|~In[2]|~In[3]|~In[4]|~In[5]|~In[6]|~In[7])&~CCinr25[1];	//motor 1 CW spin
-	assign CCin[0] = CCinr25[1];																				//regen break 1 for motor 1 and motor 2
+	assign CCin[1] = In[0]&~In[2] | In[0]&~In[3] | In[0]&~In[1];
+	assign CCin[2] = In[1]&~In[3] | ~In[0]&In[1] | In[1]&~In[2];
 	
+	assign CCin[4] = In[2]&~In[3] | ~In[1]&In[2] | ~In[0]&In[2];
+	assign CCin[5] = ~In[0]&In[3] | ~In[1]&In[3] | ~In[2]&In[3];
 	
-	assign CCin[5] = In[2]&(~In[0]|~In[1]|~In[3]|~In[4]|~In[5]|~In[6]|~In[7])&~CCinr25[1]; //Motor 2
-	assign CCin[4] = In[3]&(~In[0]|~In[1]|~In[2]|~In[4]|~In[5]|~In[6]|~In[7])&~CCinr25[1];
-	assign CCin[3] = CCinr25[1];																				//regen break for motor 3 and 4
+	assign CCin[6] = In[4]&In[5]&In[6]&In[7];
+	assign CCin[9] = In[4]&In[5]&In[6]&In[7];
 	
-	assign CCin[8] = In[4]&(~In[0]|~In[1]|~In[2]|~In[3]|~In[5]|~In[6]|~In[7])&~CCinr811[1]; //Motor 3
-	assign CCin[7] = In[5]&(~In[0]|~In[1]|~In[2]|~In[3]|~In[4]|~In[6]|~In[7])&~CCinr811[1];
-	assign CCin[6] = CCinr811[1];
+	assign CCin[7] = In[4]&~In[6] | In[4]&~In[7] | In[4]&~In[5];
+	assign CCin[8] = In[5]&~In[7] | In[5]&~In[6] | ~In[4]&In[5];
 	
-	assign CCin[11] = In[6]&(~In[0]|~In[1]|~In[2]|~In[3]|~In[4]|~In[5]|~In[7])&~CCinr811[1]; //Motor 4
-	assign CCin[10] = In[7]&(~In[0]|~In[1]|~In[2]|~In[3]|~In[4]|~In[5]|~In[6])&~CCinr811[1];
-	assign CCin[9] = CCinr811[1];
+	assign CCin[10] = In[6]&~In[7] | ~In[4]&In[6] | ~In[5]&In[6];
+	assign CCin[11] = ~In[6]&In[7] | ~In[4]&In[7] | ~In[5]&In[7];
 	
-	
-
 
 endmodule
