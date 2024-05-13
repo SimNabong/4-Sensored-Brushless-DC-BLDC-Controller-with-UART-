@@ -5,7 +5,7 @@ module CommutationControl(
 	output [5:0]PT //6 Power Transistor control signals
 );
 	/*
-	  UI[0](Regen Break One) or UI[1]&UI[2](Regen Break Two)
+	  UI[0](Regen brake One) or UI[1]&UI[2](Regen brake Two)
 	  UI[1] is clockwise spin
 	  UI[2] is counter-cw spin
 	  HS[0],HS[1],HS[2] are the HS sensor signals
