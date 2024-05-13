@@ -1,5 +1,5 @@
-//all 4 motors can individually be control to either spin CW, spin CCW, and regen break 2. for regen break 1, they break together in 2's. motor 1 and 2 together and 3 and 4 together. 
-//the 4 functions each motor has is clockwise spin,counter-clockwise spin, regenerative breaking using high-side mosfets, and regen breaking using the low-side mosfets
+//all 4 motors can individually be control to either spin CW, spin CCW, and regen brake 2. for regen brake 1, they brake together in 2's. motor 1 and 2 together and 3 and 4 together. 
+//the 4 functions each motor has is clockwise spin,counter-clockwise spin, regenerative brakeing using high-side mosfets, and regen brakeing using the low-side mosfets
 //this is a diverging combinationalcircuit that goes from 8(the 8-bits from the UART receiver) to 12(the input for the commutation controller for the motor)
 module Diverging8bit(
 	input [7:0] In, //8-bit input from the receiver
