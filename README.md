@@ -4,14 +4,14 @@ The Top Entity module is the SBLDCMC_w_UART.v which contains 7 modules: the UART
 The purpose of this module is to connect the entity modules EightBit_to_SBLDCCommutation.v and UARTReceiver.v
 
 Currently, this controller only uses 24 out of the 256 possible combinations from the 8-bits given by the UART. Which means, this controller can be further modified/improved.
-The 4 SBLDC motor has 4 functions each, which can be found in the CommutationControl.v moodule. These functions are clockwise spin,counter-clockwise spin, regenerative breaking using high-side mosfets, and regen breaking using the low-side mosfets. #note that it can also be other power semiconductor devices
+The 4 SBLDC motor has 4 functions each, which can be found in the CommutationControl.v moodule. These functions are clockwise spin,counter-clockwise spin, regenerative braking using high-side mosfets, and regen braking using the low-side mosfets. #note that it can also be other power semiconductor devices
 
 To control the CommutationControl.v module, i employed an 8 to 12 diverging combinational circuit and placed it in the Diverging8bit.v module. This module allows me to use the 8-bit given by the UART to control each of the modules separately and in combinations with each other. Currently this only uses 24 combinations out of the 256 possible ones, but this is only due to the incompleteness of this system. In the near future, im planning on adding more of the functions I have designed that the motor will be able to do. Also, utilize more possible combinations and maybe use a UART that collects more that 8-bits or another communication protocol. 
 
 Here are the cuurrent Control Signals you can use for this controller:
 Control signals	
 
-CW=clockwise spin,CCW=counter-clockwise spin, R1=regenarative breaking using high-side of the mosfets, and R2=regenerative breaking using the low-side mosfets.
+CW=clockwise spin,CCW=counter-clockwise spin, R1=regenarative braking using high-side of the mosfets, and R2=regenerative braking using the low-side mosfets.
 		
 		8'b00000000; //all off
 	
