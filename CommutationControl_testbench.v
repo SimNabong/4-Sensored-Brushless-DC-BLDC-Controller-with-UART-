@@ -49,7 +49,7 @@ module CommutationControl_testbench();
 		#5 UI[2:0]=3'b001;HS[0]=0;HS[1]=1;HS[2]=1; //state 2
 		#5 UI[2:0]=3'b001;HS[0]=0;HS[1]=0;HS[2]=1; //state 1
 		
-		// Regen Break Two(cw and ccw) on with HS sensors
+		// Regen brake Two(cw and ccw) on with HS sensors
 		#5 UI[2:0]=3'b011;HS[0]=1;HS[1]=0;HS[2]=1; //state 6
 		#5 UI[2:0]=3'b011;HS[0]=1;HS[1]=0;HS[2]=0; //state 5
 		#5 UI[2:0]=3'b011;HS[0]=1;HS[1]=1;HS[2]=0; //state 4
@@ -60,7 +60,7 @@ module CommutationControl_testbench();
 
 		#5 UI[2:0]=3'b001;HS[0]=0;HS[1]=0;HS[2]=1; //state 1
 		
-		//Regen Break One on with HS sensors
+		//Regen brake One on with HS sensors
 		#5 UI[2:0]=3'b100;HS[0]=0;HS[1]=0;HS[2]=1; //state 1
 		#5 UI[2:0]=3'b100;HS[0]=0;HS[1]=1;HS[2]=1; //state 2
 		#5 UI[2:0]=3'b100;HS[0]=0;HS[1]=1;HS[2]=0; //state 3
@@ -68,7 +68,7 @@ module CommutationControl_testbench();
 		#5 UI[2:0]=3'b100;HS[0]=1;HS[1]=0;HS[2]=0; //state 5
 		#5 UI[2:0]=3'b100;HS[0]=1;HS[1]=0;HS[2]=1; //state 6
 		
-		//regen break and cw and ccw on with HS sensors
+		//regen brake and cw and ccw on with HS sensors
 		#5 UI[2:0]=3'b111;HS[0]=0;HS[1]=0;HS[2]=1; //state 1
 		#5 UI[2:0]=3'b111;HS[0]=0;HS[1]=1;HS[2]=1; //state 2
 		#5 UI[2:0]=3'b111;HS[0]=0;HS[1]=1;HS[2]=0; //state 3
