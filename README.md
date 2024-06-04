@@ -1,4 +1,4 @@
-# 4-Sensored-Brushless-DC(SBLDC)-Controller-with-UART Using Verilog
+# 4-Sensored-Brushless-DC(SBLDC)-Controller with UART compatibility Using Verilog
 This repository contains codes for a controller that allows the user to control 4 sensored BLDC motors at the same time, using an 8-bit UART with parity checking and baud control. For more details about the UART code, check my UART repository(https://github.com/SimNabong/UART-Transmitter-and-Receiver-with-Verilog).
 The Top Entity module is the SBLDCMC_w_UART.v which contains 7 modules: the UARTReceiver, EightBit_to_SBLDCCommutation.v, BaudControl.v, UARTReceiverStateMachine.v, Eight_Bit_Parity_Checker.v, Diverging8bit.v and CommutationControl.v module.
 The purpose of this module is to connect the entity modules EightBit_to_SBLDCCommutation.v and UARTReceiver.v
